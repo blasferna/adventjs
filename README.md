@@ -8,6 +8,7 @@ This repository contains my solutions for the challenges of [AdventJS](https://a
 |-----|--------|------------|
 | 01  | [Solution](2024/python/day1/solution.py) | - |
 | 02  | [Solution](2024/python/day2/solution.py) | - |
+| 03  | [Solution](2024/python/day3/solution.py) | - |
 
 ## 🚀 Project Structure
 
