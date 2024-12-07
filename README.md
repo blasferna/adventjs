@@ -4,15 +4,15 @@ This repository contains my solutions for the challenges of [AdventJS](https://a
 
 ## 🎯 2024 Challenges
 
-| Day | Python | TypeScript |
-|-----|--------|------------|
-| 01  | [Solution](2024/python/day1/solution.py) | - |
-| 02  | [Solution](2024/python/day2/solution.py) | - |
-| 03  | [Solution](2024/python/day3/solution.py) | - |
-| 04  | [Solution](2024/python/day4/solution.py) | - |
-| 05  | [Solution](2024/python/day5/solution.py) | - |
-| 06  | [Solution](2024/python/day6/solution.py) | - |
-| 07  | [Solution](2024/python/day7/solution.py) | - |
+| Day | Difficulty | Python | TypeScript |
+|-----|------------|--------|------------|
+| 01  | Easy |[Solution](2024/python/day1/solution.py) | - |
+| 02  | Easy |[Solution](2024/python/day2/solution.py) | - |
+| 03  | Easy |[Solution](2024/python/day3/solution.py) | - |
+| 04  | Medium |[Solution](2024/python/day4/solution.py) | - |
+| 05  | Easy |[Solution](2024/python/day5/solution.py) | - |
+| 06  | Medium |[Solution](2024/python/day6/solution.py) | - |
+| 07  | Medium |[Solution](2024/python/day7/solution.py) | - |
 
 ## 🚀 Project Structure
 
