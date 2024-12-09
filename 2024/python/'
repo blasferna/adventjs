@@ -1,0 +1,48 @@
+from typing import List, Literal
+
+
+def move_train(
+    board: List[str], mov: Literal["U", "D", "R", "L"]
+) -> Literal["none", "crash", "eat"]:
+    location = {}
+    state = "none"
+    movement = {
+        "U": [-1, 0, "y"],
+        "D": [1, len(board)-1, "y"],
+        "L": [-1, 0, "x"],
+        "R": [1, len(board[0])-1, "x"],
+    }
+    direction = movement[mov]
+    limit = direction[1]
+    i = 0
+    for row in board:
+        if "@" in row:
+            index = row.index("@")
+            location = {"x": index, "y": i}
+            break
+        i += 1
+
+    new = location[direction[2]] + direction[0]
+    if (direction[2] == "y" and new < 0) or (direction[2] == "x" and limit - new < 0):
+        state = "crash"
+
+    next = "none" 
+    if state == "none":
+        next = board[location["y"] + direction[0]][location["x"]]
+
+    print(mov)
+    print(f"Next: {next}")
+    print(f"Location: {location}")
+    print(f"new = {location[direction[2]] + direction[0]}")
+    print(f"Direction: {direction}")
+    print(f"Limit: {limit}")
+    print(f"State: {state}")
+    print("\n".join(board))
+    print("\n")
+
+
+if __name__ == "__main__":
+    print(move_train(["··@··", "··o··", "·*o··", "··o··", "··o··"], "U"))
+    print(move_train(["·····", "*····", "@····", "o····", "o····"], "L"))
+    print(move_train(["·····", "·····", "····@", "····o", "····o"], "R"))
+    print(move_train(["·····", "*····", "@····", "o····", "o····"], "U"))

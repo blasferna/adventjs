@@ -4,50 +4,29 @@ from typing import List, Literal
 def move_train(
     board: List[str], mov: Literal["U", "D", "R", "L"]
 ) -> Literal["none", "crash", "eat"]:
-    i = 0
-    state = "none"
-    for e in board:
-        index = e.find("@")
-        if index != -1:
-            if mov == "U":
-                if i > 0:
-                    prev = board[i - 1]
-                    if prev[index] == "*":
-                        return "eat"
-                    if prev[index] == "·":
-                        return "none"
-                if i == 0:
-                    return "crash"
-            if mov == "D":
-                if i + 1 < len(board):
-                    next = board[i + 1]
-                    if next[index] == "o":
-                        return "crash"
-                    if next[index] == "*":
-                        return "eat"
-                    if next[index] == "·":
-                        return "none"
-            if mov == "L":
-                if index == 0:
-                    return "crash"
-                if e[index - 1] == "*":
-                    return "eat"
-                if e[index - 1] == "o":
-                    return "crash"
-                if e[index - 1] == ".":
-                    return "none"
-            if mov == "R":
-                if index + 1 == len(e):
-                    return "crash"
-                if e[index + 1] == "*":
-                    return "eat"
-                if e[index + 1] == "o":
-                    return "crash"
-                if e[index + 1] == "·":
-                    return "none"
-        i += 1
-    return state
+    movements = {
+        "U": (-1, 0),
+        "D": (1, 0),
+        "L": (0, -1),
+        "R": (0, 1),
+    }
 
+    head_x, head_y = None, None
+    for i, row in enumerate(board):
+        if "@" in row:
+            head_x, head_y = i, row.index("@")
+            break
 
-if __name__ == "__main__":
-    print(move_train(["··@··", "··o··", "·*o··", "··o··", "··o··"], "U"))
+    dx, dy = movements[mov]
+    new_x, new_y = head_x + dx, head_y + dy
+
+    if new_x < 0 or new_x >= len(board) or new_y < 0 or new_y >= len(board[0]):
+        return "crash"
+
+    next_cell = board[new_x][new_y]
+    if next_cell == "o":
+        return "crash"
+    if next_cell == "*":
+        return "eat"
+
+    return "none"

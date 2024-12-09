@@ -7,3 +7,4 @@ def test_solution():
     assert move_train(["·····", "*····", "@····", "o····", "o····"], "L") == "crash"
     assert move_train(["·····", "*····", "@····", "o····", "o····"], "R") == "none"
     assert move_train(["··@··", "··o··", "·*o··", "··o··", "··o··"], "U") == "crash"
+    assert move_train(["·····", "·····", "····@", "····o", "····o"], "R") == "crash"
