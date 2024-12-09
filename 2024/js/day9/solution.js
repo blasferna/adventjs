@@ -4,41 +4,42 @@
  * @returns {"none" | "crash" | "eat"} - The resulting state of the train.
  */
 function moveTrain(board, mov) {
-    let state = "none";
-    for (let i = 0; i < board.length; i++) {
-        const row = board[i];
-        const index = row.indexOf("@");
-        if (index !== -1) {
-            if (mov === "U") {
-                if (i > 0) {
-                    const prevRow = board[i - 1];
-                    if (prevRow[index] === "*") return "eat";
-                    if (prevRow[index] === "·") return "none";
-                }
-                if (i === 0) return "crash";
-            }
-            if (mov === "D") {
-                if (i + 1 < board.length) {
-                    const nextRow = board[i + 1];
-                    if (nextRow[index] === "o") return "crash";
-                    if (nextRow[index] === "*") return "eat";
-                    if (nextRow[index] === "·") return "none";
-                }
-            }
-            let movement = mov === "L" ? -1 : 1;
-            if (mov === "L") {
-                if (index === 0) return "crash";
-                if (row[index - 1] === "*") return "eat";
-                if (row[index - 1] === "o") return "crash";
-                if (row[index - 1] === "·") return "none";
-            }
-            if (mov === "R") {
-                if (index + 1 === row.length) return "crash";
-                if (row[index + 1] === "*") return "eat";
-                if (row[index + 1] === "o") return "crash";
-                if (row[index + 1] === "·") return "none";
-            }
-        }
+  const movements = {
+    U: [-1, 0],
+    D: [1, 0],
+    L: [0, -1],
+    R: [0, 1],
+  };
+
+  let headX = null,
+    headY = null;
+
+  for (let i = 0; i < board.length; i++) {
+    const row = board[i];
+    const index = row.indexOf("@");
+    if (index !== -1) {
+      headX = i;
+      headY = index;
+      break;
     }
-    return state;
+  }
+
+  const [dx, dy] = movements[mov];
+  const newX = headX + dx;
+  const newY = headY + dy;
+
+  if (newX < 0 || newX >= board.length || newY < 0 || newY >= board[0].length) {
+    return "crash";
+  }
+
+  const nextCell = board[newX][newY];
+
+  if (nextCell === "o") {
+    return "crash";
+  }
+  if (nextCell === "*") {
+    return "eat";
+  }
+
+  return "none";
 }
