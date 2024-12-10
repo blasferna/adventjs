@@ -3,41 +3,42 @@
  * @returns {number} The value of the register A
  */
 function compile(instructions) {
-  var position = 0;
-  var vars = {};
+  var pointer = 0;
+  var registry = {};
 
-  while (position < instructions.length) {
-    const instruction = instructions[position];
-    const params = instruction.split(" ");
-    const action = params[0];
-    const x = params[1];
-    let y = null;
-    if (params.length > 2) {
-      y = params[2];
-    }
+  while (pointer < instructions.length) {
+    const instruction = instructions[pointer];
+    const [action, x, y] = instruction.split(" ");
 
     if (action === "MOV") {
-      if (x in vars) {
-        vars[y] = vars[x];
+      if (x in registry) {
+        registry[y] = registry[x];
       } else {
-        vars[y] = Number(x);
+        registry[y] = Number(x);
       }
-      position++;
+      pointer++;
     }
 
     if (action === "INC") {
-      vars[x]++;
-      position++;
+      registry[x] = registry[x] || 0;
+      registry[x]++;
+      pointer++;
+    }
+
+    if (action === "DEC") {
+      registry[x] = registry[x] || 0;
+      registry[x]--;
+      pointer++;
     }
 
     if (action == "JMP") {
-      value = vars[x] || 0;
+      let value = registry[x] || 0;
       if (value === 0) {
-        position = Number(y);
+        pointer = Number(y);
       } else {
-        position++;
+        pointer++;
       }
     }
   }
-  return vars["A"] || "undefined";
+  return registry["A"];
 }

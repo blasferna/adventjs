@@ -1,25 +1,29 @@
 def compile(instructions):
-    position = 0
-    vars = {}
+    pointer = 0
+    registry = {}
 
-    while position < len(instructions):
-        instruction = instructions[position]
+    while pointer < len(instructions):
+        instruction = instructions[pointer]
         params = instruction.split(" ")
         action = params[0]
         x = params[1]
-        y = None
-        if len(params) > 2:
-            y = params[2]
+        y = None if len(params) <= 2 else params[2]
         if action == "MOV":
-            vars[y] = vars[x] if x in vars else int(x)
-            position += 1
+            registry[y] = registry[x] if x in registry else int(x)
+            pointer += 1
         if action == "INC":
-            vars[x] += 1
-            position += 1
+            registry[x] = registry.get(x, 0) + 1
+            pointer += 1
+        if action == "DEC":
+            registry[x] = registry.get(x, 0) - 1
+            pointer += 1
         if action == "JMP":
-            value = vars.get(x, 0)
+            if x not in registry:
+                registry[x] = 0
+            value = registry[x]
             if value == 0:
-                position = int(y)
+                pointer = int(y)
             else:
-                position += 1
-    return vars.get("A", "undefined")
+                pointer += 1
+    return  registry.get("A")
+
