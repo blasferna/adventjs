@@ -8,7 +8,6 @@ function compile(instructions) {
 
   while (position < instructions.length) {
     const instruction = instructions[position];
-    console.log(instruction);
     const params = instruction.split(" ");
     const action = params[0];
     const x = params[1];
@@ -42,10 +41,3 @@ function compile(instructions) {
   }
   return vars["A"] || "undefined";
 }
-const start = process.hrtime();
-const instructions = ["MOV -1 C", "INC C", "JMP C 1", "MOV C A", "INC A"];
-console.log(compile(instructions));
-
-const [seconds, nanoseconds] = process.hrtime(start);
-const executionTime = seconds + nanoseconds / 1e9; // Convertir a segundos
-console.log(`Tiempo de ejecución: ${executionTime.toFixed(5)} segundos`);
