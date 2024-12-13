@@ -18,7 +18,7 @@ This repository contains my solutions for the challenges of [AdventJS](https://a
 | 10  | Medium |[solution](2024/python/day10/solution.py) | - | [solution](2024/js/day10/solution.js)  |
 | 11  | Easy |[solution](2024/python/day11/solution.py) | - | [solution](2024/js/day11/solution.js)  |
 | 12  | Easy |[solution](2024/python/day12/solution.py) | - | [solution](2024/js/day12/solution.js)  |
-| 13  | Easy |[solution](2024/python/day13/solution.py) | - | [solution](2024/js/day13/solution.js)  |
+| 13  | Hard |[solution](2024/python/day13/solution.py) | - | [solution](2024/js/day13/solution.js)  |
 
 ## 🚀 Project Structure
 
