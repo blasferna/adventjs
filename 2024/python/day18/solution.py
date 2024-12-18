@@ -1,15 +1,12 @@
 def find_in_agenda(agenda: str, phone: str) -> dict | None:
     kids = agenda.split("\n")
     kid = [kid for kid in kids if phone in kid]
-    if kid:
-        if len(kid) > 1:
-            return None
+    if kid and len(kid) == 1:
         name = kid[0].split("<")[1].split(">")[0]
         address = kid[0].split(" ")[1:-1]
         address = " ".join(address).split("<")[0].strip()
         return {"name": name, "address": address}
     return None
-
 
 
 agenda = """+34-600-123-456 Calle Gran Via 12 <Juan Perez>
